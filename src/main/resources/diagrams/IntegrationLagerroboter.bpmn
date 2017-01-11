@@ -3,6 +3,8 @@
   <collaboration id="Collaboration">
     <participant id="pool1" name="Integrationsprozess: Lagerroboter anweisen" processRef="process_pool1"></participant>
   </collaboration>
+  <message id="lagerplatzToLagerroboter" name="LagerplatzToLagerroboter"></message>
+  <message id="lagerroboterToIntegration" name="LagerroboterToIntegration"></message>
   <process id="process_pool1" name="process_pool1" isExecutable="true">
     <laneSet id="laneSet_process_pool1">
       <lane id="lane1">
@@ -10,27 +12,30 @@
         <flowNodeRef>servicetask1</flowNodeRef>
         <flowNodeRef>messageintermediatecatchevent1</flowNodeRef>
         <flowNodeRef>endevent1</flowNodeRef>
+        <flowNodeRef>servicetask2</flowNodeRef>
       </lane>
     </laneSet>
     <startEvent id="messagestartevent1" name="Message start">
-      <messageEventDefinition></messageEventDefinition>
+      <messageEventDefinition messageRef="lagerplatzToLagerroboter"></messageEventDefinition>
     </startEvent>
     <sequenceFlow id="flow1" sourceRef="messagestartevent1" targetRef="servicetask1"></sequenceFlow>
-    <serviceTask id="servicetask1" name="An Lagerroboter senden"></serviceTask>
+    <serviceTask id="servicetask1" name="An Lagerroboter senden" activiti:class="edu.thi.process.SendToActiveMQRoboter"></serviceTask>
     <intermediateCatchEvent id="messageintermediatecatchevent1" name="MessageCatchEvent">
-      <messageEventDefinition></messageEventDefinition>
+      <messageEventDefinition messageRef="lagerroboterToIntegration"></messageEventDefinition>
     </intermediateCatchEvent>
     <sequenceFlow id="flow2" sourceRef="servicetask1" targetRef="messageintermediatecatchevent1"></sequenceFlow>
     <endEvent id="endevent1" name="Quittierung der Einlagerung senden"></endEvent>
-    <sequenceFlow id="flow3" sourceRef="messageintermediatecatchevent1" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="messageintermediatecatchevent1" targetRef="servicetask2"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="servicetask2" targetRef="endevent1"></sequenceFlow>
+    <serviceTask id="servicetask2" name="An Hauptprozess senden" activiti:class="edu.thi.process.SendToMainRoboter"></serviceTask>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
     <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
       <bpmndi:BPMNShape bpmnElement="pool1" id="BPMNShape_pool1">
-        <omgdc:Bounds height="151.0" width="461.0" x="10.0" y="10.0"></omgdc:Bounds>
+        <omgdc:Bounds height="151.0" width="691.0" x="10.0" y="10.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="lane1" id="BPMNShape_lane1">
-        <omgdc:Bounds height="151.0" width="441.0" x="30.0" y="10.0"></omgdc:Bounds>
+        <omgdc:Bounds height="151.0" width="671.0" x="30.0" y="10.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="messagestartevent1" id="BPMNShape_messagestartevent1">
         <omgdc:Bounds height="35.0" width="35.0" x="60.0" y="70.0"></omgdc:Bounds>
@@ -42,7 +47,10 @@
         <omgdc:Bounds height="35.0" width="35.0" x="320.0" y="70.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="400.0" y="70.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="570.0" y="70.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask2" id="BPMNShape_servicetask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="400.0" y="60.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
         <omgdi:waypoint x="95.0" y="87.0"></omgdi:waypoint>
@@ -55,6 +63,10 @@
       <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
         <omgdi:waypoint x="355.0" y="87.0"></omgdi:waypoint>
         <omgdi:waypoint x="400.0" y="87.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="505.0" y="87.0"></omgdi:waypoint>
+        <omgdi:waypoint x="570.0" y="87.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
