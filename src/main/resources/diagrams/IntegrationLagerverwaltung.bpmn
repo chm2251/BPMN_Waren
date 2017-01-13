@@ -16,7 +16,7 @@
       <messageEventDefinition></messageEventDefinition>
     </startEvent>
     <sequenceFlow id="flow1" sourceRef="messagestartevent1" targetRef="servicetask1"></sequenceFlow>
-    <serviceTask id="servicetask1" name="LVS Webservice aufrufen"></serviceTask>
+    <serviceTask id="servicetask1" name="LVS Webservice aufrufen" activiti:class="edu.thi.process.Lagerverwaltung"></serviceTask>
     <intermediateCatchEvent id="messageintermediatecatchevent1" name="MessageCatchEvent">
       <messageEventDefinition></messageEventDefinition>
     </intermediateCatchEvent>

@@ -18,7 +18,7 @@
       <messageEventDefinition></messageEventDefinition>
     </startEvent>
     <sequenceFlow id="flow1" sourceRef="messagestartevent1" targetRef="servicetask1"></sequenceFlow>
-    <serviceTask id="servicetask1" name="An ERP System senden"></serviceTask>
+    <serviceTask id="servicetask1" name="An ERP System senden" activiti:class="edu.thi.process.WebServiceClient"></serviceTask>
     <intermediateCatchEvent id="messageintermediatecatchevent1" name="MessageCatchEvent">
       <messageEventDefinition></messageEventDefinition>
     </intermediateCatchEvent>
@@ -73,7 +73,7 @@
         <omgdi:waypoint x="449.0" y="67.0"></omgdi:waypoint>
         <omgdi:waypoint x="620.0" y="67.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="100.0" x="455.0" y="101.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="11.0" x="455.0" y="101.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
@@ -81,7 +81,7 @@
         <omgdi:waypoint x="450.0" y="287.0"></omgdi:waypoint>
         <omgdi:waypoint x="620.0" y="287.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="100.0" x="455.0" y="240.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="22.0" x="455.0" y="240.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
