@@ -14,7 +14,7 @@ public class LagerplatzAbrufen implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         Long anzahl = (Long) execution.getVariable("anzahl");
         
-        Map<String, Object> data = new HashMap<>();
+        Map<String, Object> data = new HashMap<String, Object>();
         data.put("anzahl", anzahl);
         
         
