@@ -1,0 +1,25 @@
+//created on: 10.12.2016
+package priorules;
+
+
+//declare any global variables here
+
+rule "SelectPriority1"
+
+    when
+       $s : Bestellungen(name.name == "Aspirin")
+    then
+       $s.getPriority().setName("1");
+       $s.getName().setName("");
+       update($s);
+end
+
+rule "SelectPriority2"
+
+    when
+       $s : Bestellungen(name.name == "Insulin rapid")
+    then
+       $s.getPriority().setName("2");
+       $s.getName().setName("");
+       update($s);
+end
