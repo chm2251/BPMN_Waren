@@ -141,5 +141,6 @@
 	<classpathentry kind="lib" path="/media/sf_linuxshare/linuxShare/Camel_Tutorial/Part1/lib/camel-core-2.18.0.jar"/>
 	<classpathentry kind="lib" path="/media/sf_linuxshare/linuxShare/Camel_Tutorial/Part1/lib/slf4j-api-1.7.21.jar"/>
 	<classpathentry kind="lib" path="/media/sf_linuxshare/linuxShare/Camel_Tutorial/Part1/lib/slf4j-simple-1.7.21.jar"/>
+	<classpathentry kind="lib" path="/home/lars/apache-activemq-5.14.1/activemq-all-5.14.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
