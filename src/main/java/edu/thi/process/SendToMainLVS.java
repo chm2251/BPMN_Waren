@@ -14,7 +14,7 @@ public class SendToMainLVS implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         Integer lagerplatzid = (Integer) execution.getVariable("lagerplatzid");
         
-        Map<String, Object> data = new HashMap<>();
+        Map<String, Object> data = new HashMap<String, Object>();
         data.put("lagerplatzid", lagerplatzid);
         
         

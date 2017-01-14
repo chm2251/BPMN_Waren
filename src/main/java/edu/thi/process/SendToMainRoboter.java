@@ -14,7 +14,7 @@ public class SendToMainRoboter implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         Boolean confirmation = (Boolean) execution.getVariable("confirmation");
         
-        Map<String, Object> data = new HashMap<>();
+        Map<String, Object> data = new HashMap<String, Object>();
         data.put("confirmation", confirmation);
         
         
