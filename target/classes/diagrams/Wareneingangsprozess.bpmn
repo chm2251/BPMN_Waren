@@ -5,11 +5,13 @@
   </collaboration>
   <message id="integrationLVS" name="IntegrationLVS"></message>
   <message id="integrationRoboter" name="IntegrationRoboter"></message>
+  <message id="anfrageToERP" name="AnfrageToERP"></message>
+  <message id="istbestellt" name="IstBestellt"></message>
+  <message id="istnichtbestellt" name="IstNichtBestellt"></message>
   <process id="process_pool1" name="process_pool1" isExecutable="true">
     <laneSet id="laneSet_process_pool1">
       <lane id="lane1" name="Wareneingangsprüfer">
         <flowNodeRef>messagestartevent1</flowNodeRef>
-        <flowNodeRef>mailtask1</flowNodeRef>
         <flowNodeRef>eventgateway1</flowNodeRef>
         <flowNodeRef>messageintermediatecatchevent1</flowNodeRef>
         <flowNodeRef>messageintermediatecatchevent2</flowNodeRef>
@@ -20,6 +22,7 @@
         <flowNodeRef>businessruletask1</flowNodeRef>
         <flowNodeRef>exclusivegateway3</flowNodeRef>
         <flowNodeRef>usertask4</flowNodeRef>
+        <flowNodeRef>servicetask3</flowNodeRef>
       </lane>
       <lane id="lane2" name="Verwaltung">
         <flowNodeRef>usertask3</flowNodeRef>
@@ -37,17 +40,16 @@
       </lane>
     </laneSet>
     <startEvent id="messagestartevent1" name="Message start">
-      <messageEventDefinition></messageEventDefinition>
+      <messageEventDefinition messageRef="anfrageToERP"></messageEventDefinition>
     </startEvent>
-    <serviceTask id="mailtask1" name="Warenlieferung identifizieren" activiti:type="mail"></serviceTask>
-    <sequenceFlow id="flow1" sourceRef="messagestartevent1" targetRef="mailtask1"></sequenceFlow>
+    <sequenceFlow id="flow1" sourceRef="messagestartevent1" targetRef="servicetask3"></sequenceFlow>
     <eventBasedGateway id="eventgateway1" name="Event Gateway"></eventBasedGateway>
-    <sequenceFlow id="flow2" sourceRef="mailtask1" targetRef="eventgateway1"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="servicetask3" targetRef="eventgateway1"></sequenceFlow>
     <intermediateCatchEvent id="messageintermediatecatchevent1" name="MessageCatchEvent">
-      <messageEventDefinition></messageEventDefinition>
+      <messageEventDefinition messageRef="istbestellt"></messageEventDefinition>
     </intermediateCatchEvent>
     <intermediateCatchEvent id="messageintermediatecatchevent2" name="Auf Fehlermeldung warten">
-      <messageEventDefinition></messageEventDefinition>
+      <messageEventDefinition messageRef="istnichtbestellt"></messageEventDefinition>
     </intermediateCatchEvent>
     <sequenceFlow id="flow3" sourceRef="eventgateway1" targetRef="messageintermediatecatchevent1"></sequenceFlow>
     <sequenceFlow id="flow4" sourceRef="eventgateway1" targetRef="messageintermediatecatchevent2"></sequenceFlow>
@@ -68,7 +70,7 @@
     <sequenceFlow id="flow9" name="Alternativware" sourceRef="inclusivegateway1" targetRef="businessruletask1">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${zustand=="andere"}]]></conditionExpression>
     </sequenceFlow>
-    <businessRuleTask id="businessruletask1" name="Über Annahme der Alternativbestellung entscheiden" activiti:ruleVariablesInput="${Bestellungen}" activiti:rules="SelectPriority1, SelectPriority2"></businessRuleTask>
+    <businessRuleTask id="businessruletask1" name="Über Annahme der Alternativbestellung entscheiden" activiti:ruleVariablesInput="${Bestellungen}" activiti:rules="SelectPriority1,SelectPriority2"></businessRuleTask>
     <sequenceFlow id="flow10" name="Ware vollständig und einwandfrei" sourceRef="inclusivegateway1" targetRef="exclusivegateway2">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${zustand=="passt"}]]></conditionExpression>
     </sequenceFlow>
@@ -125,6 +127,7 @@
       </extensionElements>
     </userTask>
     <sequenceFlow id="flow12" sourceRef="usertask2" targetRef="usertask3"></sequenceFlow>
+    <serviceTask id="servicetask3" name="Warenlieferung identifizieren" activiti:class="edu.thi.process.WarenlieferungIdentifizieren"></serviceTask>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
     <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
@@ -142,9 +145,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="messagestartevent1" id="BPMNShape_messagestartevent1">
         <omgdc:Bounds height="35.0" width="35.0" x="80.0" y="62.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="mailtask1" id="BPMNShape_mailtask1">
-        <omgdc:Bounds height="55.0" width="105.0" x="160.0" y="52.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="eventgateway1" id="BPMNShape_eventgateway1">
         <omgdc:Bounds height="40.0" width="40.0" x="300.0" y="59.0"></omgdc:Bounds>
@@ -209,6 +209,9 @@
       <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
         <omgdc:Bounds height="55.0" width="105.0" x="1110.0" y="52.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask3" id="BPMNShape_servicetask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="160.0" y="52.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
         <omgdi:waypoint x="115.0" y="79.0"></omgdi:waypoint>
         <omgdi:waypoint x="160.0" y="79.0"></omgdi:waypoint>
@@ -238,7 +241,7 @@
         <omgdi:waypoint x="650.0" y="79.0"></omgdi:waypoint>
         <omgdi:waypoint x="1040.0" y="79.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="100.0" x="680.0" y="59.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="74.0" x="680.0" y="59.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
@@ -247,7 +250,7 @@
         <omgdi:waypoint x="730.0" y="210.0"></omgdi:waypoint>
         <omgdi:waypoint x="730.0" y="240.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="39.0" width="100.0" x="635.0" y="190.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="99.0" x="635.0" y="190.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
@@ -255,7 +258,7 @@
         <omgdi:waypoint x="629.0" y="149.0"></omgdi:waypoint>
         <omgdi:waypoint x="780.0" y="149.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="100.0" x="640.0" y="129.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="68.0" x="640.0" y="129.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
@@ -290,7 +293,7 @@
         <omgdi:waypoint x="1020.0" y="499.0"></omgdi:waypoint>
         <omgdi:waypoint x="1280.0" y="500.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="100.0" x="960.0" y="149.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="6.0" x="960.0" y="149.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
@@ -298,7 +301,7 @@
         <omgdi:waypoint x="940.0" y="259.0"></omgdi:waypoint>
         <omgdi:waypoint x="750.0" y="260.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="100.0" x="940.0" y="169.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="6.0" x="940.0" y="169.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
