@@ -25,6 +25,7 @@ public class SendToActiveMQRoboter implements JavaDelegate {
         String url = ActiveMQConnection.DEFAULT_BROKER_URL;
         Destination destination;
         Object messageBody =  execution.getVariables();
+        Object executionId = execution.getProcessInstanceId();
     
         
         try {
@@ -39,6 +40,7 @@ public class SendToActiveMQRoboter implements JavaDelegate {
 
             ObjectMessage message = session.createObjectMessage();
             message.setObject((Serializable) messageBody);
+            message.setObject((Serializable) executionId);
             producer.send(message);
 
             connection.close();
