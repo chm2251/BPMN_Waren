@@ -24,7 +24,7 @@ public class WarenlieferungIdentifizieren implements JavaDelegate {
         WebResource webResource = client
            .resource("http://localhost:8080/Bestellungen");
         String input = "{\"bestellID\":\""+bestellID+"}";
-        ClientResponse response = webResource.type("application/jso")
+        ClientResponse response = webResource.type("text/plain")
            .post(ClientResponse.class, input);
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : "
