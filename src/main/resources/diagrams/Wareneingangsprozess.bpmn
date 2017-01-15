@@ -51,8 +51,8 @@
     <intermediateCatchEvent id="messageintermediatecatchevent2" name="Auf Fehlermeldung warten">
       <messageEventDefinition messageRef="istnichtbestellt"></messageEventDefinition>
     </intermediateCatchEvent>
-    <sequenceFlow id="flow3" sourceRef="eventgateway1" targetRef="messageintermediatecatchevent1"></sequenceFlow>
-    <sequenceFlow id="flow4" sourceRef="eventgateway1" targetRef="messageintermediatecatchevent2"></sequenceFlow>
+    <sequenceFlow id="flow3" name="bestellt" sourceRef="eventgateway1" targetRef="messageintermediatecatchevent1"></sequenceFlow>
+    <sequenceFlow id="flow4" name="nicht bestellt" sourceRef="eventgateway1" targetRef="messageintermediatecatchevent2"></sequenceFlow>
     <userTask id="usertask1" name="Wareneingang überprüfen" activiti:assignee="fozzie">
       <extensionElements>
         <activiti:formProperty id="zustand" name="Zustand" type="String" required="true"></activiti:formProperty>
@@ -87,10 +87,10 @@
     <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow16" sourceRef="parallelgateway1" targetRef="exclusivegateway2"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
-    <sequenceFlow id="flow15" name="1" sourceRef="exclusivegateway3" targetRef="exclusivegateway2">
+    <sequenceFlow id="flow15" name="Priorität 1" sourceRef="exclusivegateway3" targetRef="exclusivegateway2">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${Bestellungen.priority=="1"}]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="flow17" name="2" sourceRef="exclusivegateway3" targetRef="exclusivegateway1">
+    <sequenceFlow id="flow17" name="Priorität 2" sourceRef="exclusivegateway3" targetRef="exclusivegateway1">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${Bestellungen.priority=="2"}]]></conditionExpression>
     </sequenceFlow>
     <endEvent id="endevent2" name="End"></endEvent>
@@ -223,11 +223,17 @@
       <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
         <omgdi:waypoint x="340.0" y="79.0"></omgdi:waypoint>
         <omgdi:waypoint x="390.0" y="79.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="13.0" width="100.0" x="340.0" y="79.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
         <omgdi:waypoint x="320.0" y="99.0"></omgdi:waypoint>
         <omgdi:waypoint x="320.0" y="157.0"></omgdi:waypoint>
         <omgdi:waypoint x="390.0" y="159.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="13.0" width="100.0" x="316.0" y="129.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
         <omgdi:waypoint x="425.0" y="79.0"></omgdi:waypoint>
@@ -293,7 +299,7 @@
         <omgdi:waypoint x="1020.0" y="499.0"></omgdi:waypoint>
         <omgdi:waypoint x="1280.0" y="500.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="6.0" x="960.0" y="149.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="100.0" x="960.0" y="149.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
@@ -301,7 +307,7 @@
         <omgdi:waypoint x="940.0" y="259.0"></omgdi:waypoint>
         <omgdi:waypoint x="750.0" y="260.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="6.0" x="940.0" y="169.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="100.0" x="940.0" y="169.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
