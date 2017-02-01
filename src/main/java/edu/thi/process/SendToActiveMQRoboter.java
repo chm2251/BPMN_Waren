@@ -14,6 +14,8 @@ import org.activiti.engine.delegate.JavaDelegate;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
+import edu.thi.models.LagerplatzID;
+
 
 public class SendToActiveMQRoboter implements JavaDelegate {
 
@@ -24,8 +26,11 @@ public class SendToActiveMQRoboter implements JavaDelegate {
         String password = ActiveMQConnection.DEFAULT_PASSWORD;
         String url = ActiveMQConnection.DEFAULT_BROKER_URL;
         Destination destination;
-        Bestellungen bestellung =  (Bestellungen) execution.getVariable("bestellung");
-        bestellung.setProcessId(execution.getId());
+        Long lagerplatzId =  (Long) execution.getVariable("lagerplatzId");
+        
+        LagerplatzID lagerplatz = new LagerplatzID();
+        lagerplatz.setLagerplatzId(lagerplatzId);
+        lagerplatz.setProcessId(execution.getId());
         
     
         
@@ -40,8 +45,8 @@ public class SendToActiveMQRoboter implements JavaDelegate {
             producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
             ObjectMessage message = session.createObjectMessage();
-            message.setJMSMessageID("bestellung_" + bestellung.getBestellID());
-            message.setObject((Serializable) bestellung);        
+            message.setJMSMessageID("lagerplatzId_" + lagerplatz.getLagerplatzId());
+            message.setObject((Serializable) lagerplatz);        
             producer.send(message);
 
             connection.close();

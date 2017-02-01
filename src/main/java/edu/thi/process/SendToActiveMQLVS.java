@@ -14,6 +14,8 @@ import org.activiti.engine.delegate.JavaDelegate;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
+import edu.thi.models.Bestellungen;
+
 
 public class SendToActiveMQLVS implements JavaDelegate {
 

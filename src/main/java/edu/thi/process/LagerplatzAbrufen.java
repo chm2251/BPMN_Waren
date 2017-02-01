@@ -8,6 +8,8 @@ import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.activiti.engine.runtime.Execution;
 
+import edu.thi.models.Bestellungen;
+
 public class LagerplatzAbrufen implements JavaDelegate {
 
     @Override

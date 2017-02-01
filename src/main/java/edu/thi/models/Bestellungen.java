@@ -1,4 +1,4 @@
-package edu.thi.process;
+package edu.thi.models;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ public class Bestellungen implements Serializable {
    private String name;
    private Integer anzahl;
    private String processId;
-   private Long lagerplatzId;
+  
 
    
    public Long getBestellID() {
@@ -41,12 +41,5 @@ public class Bestellungen implements Serializable {
         this.processId = processId;
     }
     
-    public Long getLagerplatzId() {
-        return lagerplatzId;
-    }
-    
-    public void setLagerplatzId(Long lagerplatzId) {
-        this.lagerplatzId = lagerplatzId;
-    }
 }
 
