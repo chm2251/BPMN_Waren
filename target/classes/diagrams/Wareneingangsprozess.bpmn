@@ -8,6 +8,7 @@
   <message id="anfrageToERP" name="AnfrageToERP"></message>
   <message id="istbestellt" name="IstBestellt"></message>
   <message id="istnichtbestellt" name="IstNichtBestellt"></message>
+  <message id="processStart" name="ProcessStart"></message>
   <process id="process_pool1" name="process_pool1" isExecutable="true">
     <laneSet id="laneSet_process_pool1">
       <lane id="lane1" name="Wareneingangsprüfer">
@@ -40,7 +41,7 @@
       </lane>
     </laneSet>
     <startEvent id="messagestartevent1" name="Message start">
-      <messageEventDefinition messageRef="anfrageToERP"></messageEventDefinition>
+      <messageEventDefinition messageRef="processStart"></messageEventDefinition>
     </startEvent>
     <sequenceFlow id="flow1" sourceRef="messagestartevent1" targetRef="servicetask3"></sequenceFlow>
     <eventBasedGateway id="eventgateway1" name="Event Gateway"></eventBasedGateway>
