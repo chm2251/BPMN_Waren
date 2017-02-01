@@ -9,6 +9,8 @@ public class Bestellungen implements Serializable {
    private Long bestellID;
    private String name;
    private Integer anzahl;
+   private String processId;
+   private Long lagerplatzId;
 
    
    public Long getBestellID() {
@@ -30,5 +32,21 @@ public class Bestellungen implements Serializable {
    public void setAnzahl(Integer anzahl) {
        this.anzahl = anzahl;
    }
+   
+    public String getProcessId() {
+        return processId;
+    }
+    
+    public void setProcessId(String processId) {
+        this.processId = processId;
+    }
+    
+    public Long getLagerplatzId() {
+        return lagerplatzId;
+    }
+    
+    public void setLagerplatzId(Long lagerplatzId) {
+        this.lagerplatzId = lagerplatzId;
+    }
 }
 

@@ -12,10 +12,10 @@ public class LagerplatzAbrufen implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        Long anzahl = (Long) execution.getVariable("anzahl");
+        Bestellungen bestellung = (Bestellungen) execution.getVariable("bestellung");
         
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("anzahl", anzahl);
+        data.put("bestellung", bestellung);
         
         
         RuntimeService runtimeService = execution.getEngineServices().getRuntimeService();

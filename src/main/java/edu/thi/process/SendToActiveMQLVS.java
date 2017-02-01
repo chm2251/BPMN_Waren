@@ -24,8 +24,11 @@ public class SendToActiveMQLVS implements JavaDelegate {
         String password = ActiveMQConnection.DEFAULT_PASSWORD;
         String url = ActiveMQConnection.DEFAULT_BROKER_URL;
         Destination destination;
-        Object anzahl =   execution.getVariable("anzahl");
-        Object executionId = execution.getProcessInstanceId();
+        
+        
+        Bestellungen bestellung =   (Bestellungen) execution.getVariable("bestellung");
+        bestellung.setProcessId(execution.getId());
+        
     
         
         try {
@@ -39,8 +42,8 @@ public class SendToActiveMQLVS implements JavaDelegate {
             producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
             ObjectMessage message = session.createObjectMessage();
-            message.setObject((Serializable) anzahl);
-            message.setObject((Serializable) executionId);
+            message.setJMSMessageID("bestellung_" + bestellung.getBestellID());
+            message.setObject((Serializable) bestellung);        
             producer.send(message);
 
             connection.close();
