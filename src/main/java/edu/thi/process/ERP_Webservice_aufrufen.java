@@ -3,11 +3,6 @@ package edu.thi.process;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.ws.rs.client.ClientBuilder;
-//import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
