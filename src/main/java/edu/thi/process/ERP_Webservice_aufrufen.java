@@ -10,7 +10,7 @@ import org.activiti.engine.runtime.Execution;
 
 import com.sun.jersey.api.client.Client; 
 import com.sun.jersey.api.client.WebResource;
-import edu.thi.models.Bestellungen;
+
 
 public class ERP_Webservice_aufrufen implements JavaDelegate {
 

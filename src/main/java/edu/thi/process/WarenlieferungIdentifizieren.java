@@ -7,28 +7,18 @@ import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.activiti.engine.runtime.Execution;
 
-import edu.thi.models.Bestellungen;
+
 
 public class WarenlieferungIdentifizieren implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
     
-        Long bestellID = (Long) execution.getVariable("bestellID");
-        String name = (String) execution.getVariable("name");
-        Integer anzahl = (Integer) execution.getVariable("anzahl");
-        String processId = (String) execution.getVariable("processId");
-        Integer priority = (Integer) execution.getVariable("priority");
+        Long bestellID = (Long) execution.getVariable("bestellung.bestellID");
         
-        Bestellungen bestellung = new Bestellungen(); 
-        bestellung.setAnzahl(anzahl);
-        bestellung.setBestellID(bestellID);
-        bestellung.setName(name);
-        bestellung.setPriority(priority);
-        bestellung.setProcessId(processId);
         
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("bestellung", bestellung);
+        data.put("bestellID", bestellID);
         
         RuntimeService runtimeService = execution.getEngineServices().getRuntimeService();
         
