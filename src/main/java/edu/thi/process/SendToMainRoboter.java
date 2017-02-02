@@ -12,7 +12,7 @@ public class SendToMainRoboter implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        Boolean confirmation = (Boolean) execution.getVariable("confirmation");
+        Boolean confirmation =  (Boolean) execution.getVariable("confirmation");
         
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("confirmation", confirmation);

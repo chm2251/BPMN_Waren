@@ -12,7 +12,7 @@ public class SendToMainLVS implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        Integer lagerplatzid = (Integer) execution.getVariable("lagerplatzid");
+        Long lagerplatzid = (Long) execution.getVariable("lagerplatzid.lagerplatzId");
         
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("lagerplatzid", lagerplatzid);

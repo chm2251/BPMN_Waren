@@ -28,7 +28,14 @@ public class SendToActiveMQLVS implements JavaDelegate {
         Destination destination;
         
         
-        Bestellungen bestellung =   (Bestellungen) execution.getVariable("bestellung");
+        Long bestellID = (Long) execution.getVariable("bestellung.bestellID");
+        String name = (String) execution.getVariable("bestellung.name");
+        Integer anzahl = (Integer) execution.getVariable("bestellung.anzahl");
+        
+        Bestellungen bestellung = new Bestellungen();
+        bestellung.setAnzahl(anzahl);
+        bestellung.setBestellID(bestellID);
+        bestellung.setName(name);
         bestellung.setProcessId(execution.getId());
         
     

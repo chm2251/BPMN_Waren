@@ -26,7 +26,8 @@ public class SendToActiveMQRoboter implements JavaDelegate {
         String password = ActiveMQConnection.DEFAULT_PASSWORD;
         String url = ActiveMQConnection.DEFAULT_BROKER_URL;
         Destination destination;
-        Long lagerplatzId =  (Long) execution.getVariable("lagerplatzId");
+        
+        Long lagerplatzId =  (Long) execution.getVariable("lagerplatzid");
         
         LagerplatzID lagerplatz = new LagerplatzID();
         lagerplatz.setLagerplatzId(lagerplatzId);
