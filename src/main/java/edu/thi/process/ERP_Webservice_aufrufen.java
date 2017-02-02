@@ -16,7 +16,7 @@ public class ERP_Webservice_aufrufen implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        Long bestellID = (Long) execution.getVariable("bestellID");
+        Long bestellID = (Long) execution.getVariable("bestellungen.bestellID");
 
         final String WEBSERVICE_ADDRESS = "http://localhost:8080/ErpSystem/webapi/Bestellungen/"+bestellID; 
 
