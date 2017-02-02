@@ -23,15 +23,15 @@ public class WarenlieferungIdentifizieren implements JavaDelegate {
         
         // Search if a process is already waiting at an intermediate event
         Execution waitingExecution = runtimeService.createExecutionQuery()
-                  .messageEventSubscriptionName("ProcessStart")
+                  .messageEventSubscriptionName("AnfrageToERP")
                   .singleResult();
 
         if (waitingExecution != null) {
             // An execution is waiting --> continue it
-            runtimeService.messageEventReceived("ProcessStart", waitingExecution.getId(), data);
+            runtimeService.messageEventReceived("AnfrageToERP", waitingExecution.getId(), data);
         } else {
             // No execution is waiting --> start a new Aggregator instance
-            runtimeService.startProcessInstanceByMessage("ProcessStart", data);
+            runtimeService.startProcessInstanceByMessage("AnfrageToERP", data);
         }
 
       

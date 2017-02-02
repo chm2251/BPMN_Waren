@@ -3,6 +3,7 @@
   <collaboration id="Collaboration">
     <participant id="pool1" name="Integrationsprozess: Warenidentifikation" processRef="process_pool1"></participant>
   </collaboration>
+  <message id="anfrageToERP" name="AnfrageToERP"></message>
   <process id="process_pool1" name="process_pool1" isExecutable="true">
     <laneSet id="laneSet_process_pool1">
       <lane id="lane1">
