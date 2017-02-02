@@ -5,7 +5,6 @@
   </collaboration>
   <message id="integrationLVS" name="IntegrationLVS"></message>
   <message id="integrationRoboter" name="IntegrationRoboter"></message>
-  <message id="anfrageToERP" name="AnfrageToERP"></message>
   <message id="istbestellt" name="IstBestellt"></message>
   <message id="istnichtbestellt" name="IstNichtBestellt"></message>
   <message id="processStart" name="ProcessStart"></message>
