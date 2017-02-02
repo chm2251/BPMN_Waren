@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
   <collaboration id="Collaboration">
-    <participant id="pool1" name="Integrationsprozess: Lagerroboter anweisen" processRef="process_pool1"></participant>
+    <participant id="pool1" name="Integrationsprozess: Lagerroboter anweisen" processRef="process_pool2"></participant>
   </collaboration>
   <message id="lagerplatzToLagerroboter" name="LagerplatzToLagerroboter"></message>
   <message id="lagerroboterToIntegration" name="LagerroboterToIntegration"></message>
-  <process id="process_pool1" name="process_pool1" isExecutable="true">
-    <laneSet id="laneSet_process_pool1">
+  <process id="process_pool2" name="Lagerroboter" isExecutable="true">
+    <laneSet id="laneSet_process_pool2">
       <lane id="lane1">
         <flowNodeRef>messagestartevent1</flowNodeRef>
         <flowNodeRef>servicetask1</flowNodeRef>
