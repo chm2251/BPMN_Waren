@@ -1,25 +1,25 @@
 //created on: 10.12.2016
 package priorules;
 
-
+import edu.thi.models.Bestellungen;
 //declare any global variables here
 
 rule "SelectPriority1"
 
     when
-       $s : Bestellungen(name.name == "Aspirin")
+       $s : Bestellungen(name == "Paracetamol")
     then
-       $s.getPriority().setName("1");
-       $s.getName().setName("");
+       $s.setPriority(1);
+       $s.setName("");
        update($s);
 end
 
 rule "SelectPriority2"
 
     when
-       $s : Bestellungen(name.name == "Insulin rapid")
+       $s : Bestellungen(name == "Ibuprofen")
     then
-       $s.getPriority().setName("2");
-       $s.getName().setName("");
+       $s.setPriority(2);
+       $s.setName("");
        update($s);
 end

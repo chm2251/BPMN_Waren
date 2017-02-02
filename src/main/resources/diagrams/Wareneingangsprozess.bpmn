@@ -72,7 +72,7 @@
     <sequenceFlow id="flow9" name="Alternativware" sourceRef="inclusivegateway1" targetRef="businessruletask1">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${zustand=="andere"}]]></conditionExpression>
     </sequenceFlow>
-    <businessRuleTask id="businessruletask1" name="Über Annahme der Alternativbestellung entscheiden" activiti:ruleVariablesInput="${Bestellungen}" activiti:rules="SelectPriority1,SelectPriority2"></businessRuleTask>
+    <businessRuleTask id="businessruletask1" name="Über Annahme der Alternativbestellung entscheiden" activiti:ruleVariablesInput="${bestellung}" activiti:rules="SelectPriority1,SelectPriority2"></businessRuleTask>
     <sequenceFlow id="flow10" name="Ware vollständig und einwandfrei" sourceRef="inclusivegateway1" targetRef="exclusivegateway2">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${zustand=="passt"}]]></conditionExpression>
     </sequenceFlow>
@@ -90,10 +90,10 @@
     <sequenceFlow id="flow16" sourceRef="parallelgateway1" targetRef="exclusivegateway2"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow15" name="Priorität 1" sourceRef="exclusivegateway3" targetRef="exclusivegateway2">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${Bestellungen.priority=="1"}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${bestellung.priority==1}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow17" name="Priorität 2" sourceRef="exclusivegateway3" targetRef="exclusivegateway1">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${Bestellungen.priority=="2"}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${bestellung.priority==2}]]></conditionExpression>
     </sequenceFlow>
     <endEvent id="endevent2" name="End"></endEvent>
     <sequenceFlow id="flow20" sourceRef="messageintermediatecatchevent2" targetRef="exclusivegateway1"></sequenceFlow>
@@ -300,7 +300,7 @@
         <omgdi:waypoint x="1020.0" y="499.0"></omgdi:waypoint>
         <omgdi:waypoint x="1280.0" y="500.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="46.0" x="960.0" y="149.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="100.0" x="960.0" y="149.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
@@ -308,7 +308,7 @@
         <omgdi:waypoint x="940.0" y="259.0"></omgdi:waypoint>
         <omgdi:waypoint x="750.0" y="260.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="13.0" width="46.0" x="940.0" y="169.0"></omgdc:Bounds>
+          <omgdc:Bounds height="13.0" width="100.0" x="940.0" y="169.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">

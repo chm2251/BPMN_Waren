@@ -10,6 +10,7 @@ public class Bestellungen implements Serializable {
    private String name;
    private Integer anzahl;
    private String processId;
+   private Integer priority;
   
 
    
@@ -39,6 +40,12 @@ public class Bestellungen implements Serializable {
     
     public void setProcessId(String processId) {
         this.processId = processId;
+    }
+    public Integer getPriority() {
+        return priority;
+    }
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
     
 }
