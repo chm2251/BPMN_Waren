@@ -13,10 +13,10 @@
       </lane>
     </laneSet>
     <startEvent id="messagestartevent9" name="Bestell-ID empfangen" activiti:async="true">
-      <messageEventDefinition></messageEventDefinition>
+      <messageEventDefinition messageRef="anfrageToERP"></messageEventDefinition>
     </startEvent>
     <sequenceFlow id="flow1" sourceRef="messagestartevent9" targetRef="servicetask9"></sequenceFlow>
-    <serviceTask id="servicetask9" name="ERP-Webservice aufrufen"></serviceTask>
+    <serviceTask id="servicetask9" name="ERP-Webservice aufrufen" activiti:class="edu.thi.process.ERP_Webservice_aufrufen"></serviceTask>
     <endEvent id="endevent1" name="End"></endEvent>
     <sequenceFlow id="flow2" sourceRef="servicetask9" targetRef="endevent1"></sequenceFlow>
   </process>

@@ -55,7 +55,7 @@
     <sequenceFlow id="flow4" name="nicht bestellt" sourceRef="eventgateway1" targetRef="messageintermediatecatchevent2"></sequenceFlow>
     <userTask id="usertask1" name="Wareneingang überprüfen" activiti:assignee="fozzie">
       <extensionElements>
-        <activiti:formProperty id="zustand" name="Zustand" type="String" required="true"></activiti:formProperty>
+        <activiti:formProperty id="zustand" name="Zustand" type="string" required="true"></activiti:formProperty>
       </extensionElements>
     </userTask>
     <sequenceFlow id="flow5" sourceRef="messageintermediatecatchevent1" targetRef="usertask1"></sequenceFlow>
