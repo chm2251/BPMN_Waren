@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <message id="anzahlToLVS" name="AnzahlToLVS"></message>
+  <message id="lvsToIntegration" name="LVSToIntegration"></message>
   <process id="myProcess" name="My process" isExecutable="true">
     <startEvent id="messagestartevent1" name="Message start">
-      <messageEventDefinition></messageEventDefinition>
+      <messageEventDefinition messageRef="anzahlToLVS"></messageEventDefinition>
     </startEvent>
     <sequenceFlow id="flow1" sourceRef="messagestartevent1" targetRef="servicetask1"></sequenceFlow>
     <serviceTask id="servicetask1" name="User Task" activiti:class="edu.thi.process.SendToActiveMQLVS"></serviceTask>
     <intermediateCatchEvent id="messageintermediatecatchevent1" name="MessageCatchEvent">
-      <messageEventDefinition></messageEventDefinition>
+      <messageEventDefinition messageRef="lvsToIntegration"></messageEventDefinition>
     </intermediateCatchEvent>
     <sequenceFlow id="flow2" sourceRef="servicetask1" targetRef="messageintermediatecatchevent1"></sequenceFlow>
     <sequenceFlow id="flow3" sourceRef="messageintermediatecatchevent1" targetRef="servicetask2"></sequenceFlow>
