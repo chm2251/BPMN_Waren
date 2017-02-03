@@ -11,7 +11,6 @@
   <process id="process_pool1" name="process_pool1" isExecutable="true">
     <laneSet id="laneSet_process_pool1">
       <lane id="lane1" name="Wareneingangsprüfer">
-        <flowNodeRef>messagestartevent1</flowNodeRef>
         <flowNodeRef>eventgateway1</flowNodeRef>
         <flowNodeRef>messageintermediatecatchevent1</flowNodeRef>
         <flowNodeRef>messageintermediatecatchevent2</flowNodeRef>
@@ -21,6 +20,8 @@
         <flowNodeRef>exclusivegateway1</flowNodeRef>
         <flowNodeRef>usertask4</flowNodeRef>
         <flowNodeRef>servicetask3</flowNodeRef>
+        <flowNodeRef>usertask6</flowNodeRef>
+        <flowNodeRef>startevent1</flowNodeRef>
       </lane>
       <lane id="lane2" name="Verwaltung">
         <flowNodeRef>usertask3</flowNodeRef>
@@ -37,10 +38,6 @@
         <flowNodeRef>servicetask2</flowNodeRef>
       </lane>
     </laneSet>
-    <startEvent id="messagestartevent1" name="Message start">
-      <messageEventDefinition messageRef="processStart"></messageEventDefinition>
-    </startEvent>
-    <sequenceFlow id="flow1" sourceRef="messagestartevent1" targetRef="servicetask3"></sequenceFlow>
     <eventBasedGateway id="eventgateway1" name="Event Gateway"></eventBasedGateway>
     <sequenceFlow id="flow2" sourceRef="servicetask3" targetRef="eventgateway1"></sequenceFlow>
     <intermediateCatchEvent id="messageintermediatecatchevent1" name="MessageCatchEvent">
@@ -115,6 +112,16 @@
     </userTask>
     <sequenceFlow id="flow12" sourceRef="usertask2" targetRef="usertask3"></sequenceFlow>
     <serviceTask id="servicetask3" name="Warenlieferung identifizieren" activiti:class="edu.thi.process.WarenlieferungIdentifizieren"></serviceTask>
+    <userTask id="usertask6" name="Warenlieferung überprüfen" activiti:assignee="kermit">
+      <extensionElements>
+        <activiti:formProperty id="bestellID" name="BestellID" type="long" expression="${bestellung.bestellID}" required="true"></activiti:formProperty>
+        <activiti:formProperty id="anzahl" name="Anzahl" type="int" expression="${bestellung.anzahl}" required="true"></activiti:formProperty>
+        <activiti:formProperty id="name" name="Name" type="string" expression="${bestellung.name}" required="true"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <sequenceFlow id="flow28" sourceRef="startevent1" targetRef="usertask6"></sequenceFlow>
+    <sequenceFlow id="flow29" sourceRef="usertask6" targetRef="servicetask3"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
     <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
@@ -129,9 +136,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="lane3" id="BPMNShape_lane3">
         <omgdc:Bounds height="145.0" width="1701.0" x="40.0" y="551.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="messagestartevent1" id="BPMNShape_messagestartevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="80.0" y="62.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="eventgateway1" id="BPMNShape_eventgateway1">
         <omgdc:Bounds height="40.0" width="40.0" x="300.0" y="59.0"></omgdc:Bounds>
@@ -193,10 +197,12 @@
       <bpmndi:BPMNShape bpmnElement="servicetask3" id="BPMNShape_servicetask3">
         <omgdc:Bounds height="55.0" width="105.0" x="160.0" y="52.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
-        <omgdi:waypoint x="115.0" y="79.0"></omgdi:waypoint>
-        <omgdi:waypoint x="160.0" y="79.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="usertask6" id="BPMNShape_usertask6">
+        <omgdc:Bounds height="55.0" width="105.0" x="100.0" y="132.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="66.0" y="72.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
         <omgdi:waypoint x="265.0" y="79.0"></omgdi:waypoint>
         <omgdi:waypoint x="300.0" y="79.0"></omgdi:waypoint>
@@ -298,6 +304,14 @@
       <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
         <omgdi:waypoint x="1162.0" y="107.0"></omgdi:waypoint>
         <omgdi:waypoint x="1163.0" y="372.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow28" id="BPMNEdge_flow28">
+        <omgdi:waypoint x="83.0" y="107.0"></omgdi:waypoint>
+        <omgdi:waypoint x="152.0" y="132.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow29" id="BPMNEdge_flow29">
+        <omgdi:waypoint x="152.0" y="132.0"></omgdi:waypoint>
+        <omgdi:waypoint x="212.0" y="107.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
