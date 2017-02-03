@@ -27,14 +27,14 @@ public class ERP_Webservice_aufrufen implements JavaDelegate {
         
         System.out.println("bestellt?"+response);
 
-        String message = null; 
-
-        if (response.equals("Ja")){
-            message = "istbestellt";
-        }
-        else    { 
-            message = "istnichtbestellt";
-        }
+//        String message = null; 
+//
+//        if (response.equals("Ja")){
+//            message = "IstBestellt";
+//        }
+//        else    { 
+//            message = "IstNichtBestellt";
+//        }
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("response", response);
         
@@ -42,15 +42,15 @@ public class ERP_Webservice_aufrufen implements JavaDelegate {
         
         // Search if a process is already waiting at an intermediate event
         Execution waitingExecution = runtimeService.createExecutionQuery()
-                  .messageEventSubscriptionName(message)
+                  .messageEventSubscriptionName("IstBestellt")
                   .singleResult();
 
         if (waitingExecution != null) {
             // An execution is waiting --> continue it
-            runtimeService.messageEventReceived(message, waitingExecution.getId(), data);
+            runtimeService.messageEventReceived("IstBestellt", waitingExecution.getId(), data);
         } else {
             // No execution is waiting --> start a new Aggregator instance
-            runtimeService.startProcessInstanceByMessage(message, data);
+            runtimeService.startProcessInstanceByMessage("IstBestellt", data);
         }
 
 
