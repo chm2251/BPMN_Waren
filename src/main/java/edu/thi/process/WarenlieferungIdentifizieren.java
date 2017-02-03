@@ -14,11 +14,11 @@ public class WarenlieferungIdentifizieren implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
     
-        Long bestellID = (Long) execution.getVariable("bestellung.bestellID");
-        
+        Long bestellID = (Long) execution.getVariable("bestellID");
+        System.out.println("bestellid"+bestellID);
         
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("bestellID", bestellID);
+        data.put("BestellID", bestellID);
         
         RuntimeService runtimeService = execution.getEngineServices().getRuntimeService();
         

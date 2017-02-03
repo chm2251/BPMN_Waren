@@ -16,7 +16,7 @@ public class ERP_Webservice_aufrufen implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        Long bestellID = (Long) execution.getVariable("bestellungen.bestellID");
+        Long bestellID = (Long) execution.getVariable("bestellID");
 
         final String WEBSERVICE_ADDRESS = "http://localhost:8080/ErpSystem/webapi/Bestellungen/"+bestellID; 
 
@@ -24,15 +24,16 @@ public class ERP_Webservice_aufrufen implements JavaDelegate {
         Client c = Client.create();
         WebResource resource = c.resource(WEBSERVICE_ADDRESS); 
         String response = resource.get(String.class); 
-        //System.out.println(response);
+        
+        System.out.println("bestellt?"+response);
 
         String message = null; 
 
         if (response.equals("Ja")){
-            message = "IstBestellt";
+            message = "istbestellt";
         }
         else    { 
-            message = "IstNichtBestellt";
+            message = "istnichtbestellt";
         }
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("response", response);
