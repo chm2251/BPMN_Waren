@@ -112,11 +112,11 @@
     </userTask>
     <sequenceFlow id="flow12" sourceRef="usertask2" targetRef="usertask3"></sequenceFlow>
     <serviceTask id="servicetask3" name="Warenlieferung identifizieren" activiti:class="edu.thi.process.WarenlieferungIdentifizieren"></serviceTask>
-    <userTask id="usertask6" name="Warenlieferung überprüfen" activiti:assignee="kermit">
+    <userTask id="usertask6" name="Warenlieferung eingeben" activiti:assignee="kermit">
       <extensionElements>
-        <activiti:formProperty id="bestellID" name="BestellID" type="long" expression="${bestellung.bestellID}" required="true"></activiti:formProperty>
-        <activiti:formProperty id="anzahl" name="Anzahl" type="int" expression="${bestellung.anzahl}" required="true"></activiti:formProperty>
-        <activiti:formProperty id="name" name="Name" type="string" expression="${bestellung.name}" required="true"></activiti:formProperty>
+        <activiti:formProperty id="bestellID" name="BestellID" type="long" required="true"></activiti:formProperty>
+        <activiti:formProperty id="anzahl" name="Anzahl" type="long" required="true"></activiti:formProperty>
+        <activiti:formProperty id="name" name="Name" type="string" required="true"></activiti:formProperty>
       </extensionElements>
     </userTask>
     <startEvent id="startevent1" name="Start"></startEvent>
